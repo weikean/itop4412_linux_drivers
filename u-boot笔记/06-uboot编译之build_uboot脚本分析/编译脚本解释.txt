@@ -1,0 +1,71 @@
+4-10行
+脚本的条件判断，判断是否有参数传进去，没有参数，则打印退出。
+
+12-29行
+条件判断
+配置参数sec_path和CoreBoard_type
+以SCP1g为例，脚本的$1 =SCP_1GDDR
+sec_path="../CodeSign4SecureBoot_SCP/"
+CoreBoard_type="SCP"
+
+32行
+CPU核数
+ROOT_DIR=CUR_DIR等于当前目录pwd
+
+39-43行
+设置distclean参数
+删除两个文件
+
+45-50行
+clean相关
+
+52-57行
+	需要../CodeSign4SecureBoot_SCP/
+60-91行
+	条件判断，然后执行
+	make itop_4412_android_config_scp_1GDDR
+	Makefile文件（后面详细分析）
+93行
+	make -j4 多核编译
+95-101行
+	判断checksum_bl2_14k.bin是否存在
+
+103-105行
+	拷贝文件checksum_bl2_14k.bin和u-boot.bin
+	删除checksum_bl2_14k.bin
+
+107行
+	进入../CodeSign4SecureBoot_SCP/目录
+	
+114-128行
+CoreBoard_type= SCP
+cat生成u-boot-iTOP-4412.bin镜像
+
+130行
+	拷贝到编译目录
+
+132-134行
+	删除文件checksum_bl2_14k.bin和u-boot.bin
+	
+
+cat 
+E4412_N.bl1.SCP2G.bin  15K
+bl2.bin 14K
+all00_padding.bin 2K    14K+2K=16K
+u-boot.bin 328K
+tzsw_SMDK4412_SCP_2GB.bin  155k <=156K
+> u-boot-iTOP-4412.bin 
+
+pop的uboot组成
+bl1 =8K
+bl2 = 16K
+u-boot.bin 328K
+tzsw_SMDK4412_SCP_2GB.bin <=87k
+
+	
+	
+
+
+
+
+

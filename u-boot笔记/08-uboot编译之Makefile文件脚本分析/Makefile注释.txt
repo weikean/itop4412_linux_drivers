@@ -1,0 +1,74 @@
+24-34行
+	版本相关等
+36-44行
+	运行一下
+	HOSTARCH=x86_64
+	主机的平台
+45-46行
+	HOSTOS= linux
+	主机的操作系统
+48-51行
+	SHELL=/bin/bash
+53行
+	设置环境变量参数
+	 HOSTARCH HOSTOS SHELL
+56行
+	定义一个变量VENDOR
+59-64行
+	Allow for silent builds
+	允许编译的时候不打印信息
+88-92行
+	编译的时候输入参数
+94-95行
+	设置saved-output等于当前目录
+97-109行
+	设置环境变量 TOPDIR SRCTREE OBJTREE
+111行				  	
+	MKCONFIG设置为当前目录下的mkconfig
+114-117行
+	设置环境变量REMOTE_BUILD
+122-129行
+	设置环境变量obj src
+127行
+	不用管
+137-140行
+	不用管
+145-147行
+	取出预编译的宏
+	关键词：include/autoconf.mk
+150-151行
+	环境变量ARCH CPU BOARD VENDOR SOC
+152-200行
+	配置编译器
+203行
+	include $(TOPDIR)/config.mk
+	gcc-xx xx.x xxx.xx …… -I include<libxx.a>
+	-o xxx
+	这里才是真正的Makefile文件。
+205行
+	start必须先运行
+221-325行
+	包含的各种库
+	
+331行
+	ALL+=$(obj)u-boot.srec $(obj)u-boot.bin $(obj)System.map $(U_BOOT_NAND) $(U_BOOT_ONENAND)
+332-
+	需要u-boot.bin
+	u-boot.bin（二进制文件）依赖u-boot（elf文件）
+	u-boot
+GEN_UBOOT:
+	UNDEF_SYM=`$(OBJDUMP) -x $(LIBBOARD) $(LIBS) | \
+                sed  -n -e 's/.*\($(SYM_PREFIX)__u_boot_cmd_.*\)/-u\1/p'|sort|uniq`;\
+                cd $(LNDIR) && $(LD) $(LDFLAGS) $$UNDEF_SYM $(__OBJS) \
+                        --start-group $(__LIBS) --end-group $(PLATFORM_LIBS) \
+                        -Map u-boot.map -o u-boot
+u-boot:	depend $(SUBDIRS) $(OBJS) $(LIBBOARD) $(LIBS) $(LDSCRIPT) $(obj)u-boot.lds
+                $(GEN_UBOOT) -O
+
+u-boot.map	:预编译的文件
+	
+
+UNDEF_SYM=`gcc-xx -x lib*.a  ;
+gcc-xx -Bstatic -T u-boot.lds  -Ttext 0xc3e00000 $UNDEF_SYM cpu/arm_cortexa9/start.o --start-group lib*.a  --end-group  -lgcc -Map u-boot.map -o u-boot
+
+	

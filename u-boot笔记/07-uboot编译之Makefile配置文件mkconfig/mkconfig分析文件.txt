@@ -1,0 +1,96 @@
+mkconfig itop_4412_android arm arm_cortexa9 smdkc210 samsung s5pc210 SCP_1GDDR
+
+11-13行
+定义两个变量，没有赋值
+
+15行
+打印一串字符串
+
+17-28行
+条件语句
+赋值 BOARD_NAME="itop_4412_android"
+
+30行-38行
+判断参数是否为0，为零则执行
+
+40行
+重复赋值BOARD_NAME="itop_4412_android"
+
+42-43行
+$#表示参数
+-lt表示大于
+-gt表示小于
+
+45-48行
+判断是否为arm架构，不是则退出
+
+50行
+打印一串字符串
+
+55-71行
+SRCTREE和OBJTREE相等
+70行ln -s asm-arm asm建立链接文件
+
+73行
+rm -f asm-arm/arch
+
+75-79行
+ln -s arch-s5pc210 asm-arm/arch
+
+81-84行
+ln -s proc-armv asm-arm/proc
+
+89-95行
+config.mk文件
+ARCH   = arm 
+CPU    = arm_cortexa9 
+BOARD  = smdkc210
+VENDOR = samsung 
+SOC    = s5pc210
+追加CORE   =  SCP
+
+98-102行
+BOARDDIR=samsung/smdkc210
+
+
+107-121行 
+     ln -sf /board/samsung/smdkc210/lowlevel_init_SCP.S  /board/samsung/smdkc210/lowlevel_init.S	
+     ln -sf /cpu/arm_cortexa9/s5pc210/cpu_init_SCP.S     /cpu/arm_cortexa9/s5pc210/cpu_init.S
+
+127-132行
+	建立config.h
+config.h
+/* Automatically generated - do not edit */
+#define CONFIG_SCP_1GDDR
+#define CONFIG_BOARDDIR board/samsung/smdkc210
+#include <config_defaults.h>
+#include <configs/$BOARD_NAME.h>
+#include <asm/config.h>
+
+
+135-137行
+没用
+
+141行
+向config.h中输出一行
+
+
+
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+

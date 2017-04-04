@@ -1,0 +1,81 @@
+欢迎大家观看迅为uboot视频教程！
+
+做了哪些事情：
+	1.解压的这些文件是做什么的
+	2.编译
+	3.烧写（拨码开关）
+	4.运行uboot
+问题小结
+	疑问1：uboot源码等文件做什么，有什么用？
+	疑问2：编译的过程怎么回事？
+		疑问2.1：编译脚本build_uboot.sh
+		疑问2.2：配置mkconfig文件做了哪些事情
+			创建平台相关的链接文件
+			创建config.mk
+			创建config.h文件
+		疑问2.3Makefile文件分析
+		疑问2.4uboot镜像的组成
+			BL1+BL2+BL2补全+u-boot.bin+补全+TZSW
+	疑问3：烧写是怎么实现的？
+	疑问4：tf卡启动和fastboot到底怎么回事？
+	疑问5：uboot启动会做哪些事情
+		5.1uboot启动之后运行的第一个文件
+	u-boot.lds分析。第一个执行的文件是cpu/arm_cortexa9/start.S
+教程的思路
+	准备工作：至少要看完视频的入门部分，编译烧写等
+	1.以问题作为出发点
+	2.解答这些问题的时候引入新的问题
+	3.给大家扩展知识和概念
+	4.注意一下，疑问解答不分先后顺序
+
+问题：为什么需要uboot？
+	分层，便于移植。
+
+带着疑问去看：Datasheet中关于uboot的部分
+	新的疑问：
+	iROM:简短的代码，在4412芯片上的内存存储器
+		64KB
+	新的疑问：
+	BL1：First boot loader，它们在扩展存储器上
+		BL1是三星提供的，不开源
+	BL2：Second boot loader
+		不由三星提供。有代码。
+	有用的知识：
+	OM（拨码开关）是由iROM控制的
+	BL1需要iROM中的代码去校验
+
+通过iROM去解决“问题4”的部分
+Android_Exynos4412_iROM_Secure_Booting_Guide_Ver.1.00.00
+iROM做了哪些事情
+关掉看门狗，关掉中断，关掉内存管理单元
+
+问题4.1：OM拨码开关在哪里起作用
+	答案:iROM中
+问题4.2：OM拨码开关是怎么对应的呢
+	以tf卡为例。TF卡启动，拨码开关要设置为10
+	原理图实际：XOM2 = 1；XOM3=XOM5=0; XOM6=0;XOM1=0;XOM4=0
+	发现它们是对应的。
+
+问题4.3tf卡烧写以及fastboot烧写，它们的命令是怎么来的？
+	答案：三星原厂资料tc4
+	文档名称：
+	SEC_Exynos4x12_[SSCR][TC4]ICS_Installation_Guide_RTM1.0.2
+	
+	
+疑问：-Ttext = 0xc3e00000 64M
+	定义在board/samsung/smdkc210/config.mk文件
+
+
+
+	
+
+
+
+
+	
+
+
+
+
+
+

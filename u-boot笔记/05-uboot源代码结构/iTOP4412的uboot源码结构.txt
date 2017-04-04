@@ -1,0 +1,32 @@
+1.all00_padding.bin 用0来补全。
+2.api 常用的接口
+3.board  常用的主板文件。只需要留下samsung/smdkc210目录
+4.build_uboot.sh 编译脚本
+5.common 通用的文件,与架构无关的文件
+6.config.mk 配置文件，后面详细分析
+7.cpu arm_cortexa9保留，其它去掉 
+8.CREDITS工作人员名单
+9.disk 实现磁盘分区的接口
+10.doc 说明的文档
+11.drivers uboot中的驱动，mmc，看门狗，时钟等等
+12.E4212 E4412_N.bl1.bin
+13.examples 例程
+14.fs 文件系统。ext2是一种文件系统。
+15.include 头文件
+ rm -rf asm-avr32 asm-blackfin asm-i386 asm-m68k asm-microblazeasm-mips asm-nios asm-nios2 asm-ppc asm-sh asm-sparc
+16.lib* 留下lib_arm，libfdt，lib_generic
+rm -rf lib_avr32 lib_blackfin lib_i386 lib_m68k lib_microblaze lib_mips lib_nios lib_nios2 lib_ppc lib_sh lib_sparc
+
+17.MAINTAINERS MAKEALL不用管。Makefile很重要，mkconfig配置文件
+详细分析。mkbl2 编译的时候看一下。
+18.onenand_ipl和nand_spl没用
+19.net网络驱动
+20.paddingaa补丁
+21.post 自检
+22.rules.mk脚本编译的说明.readme.txt,README说明文档
+23.sdfuse和sdfuse_q sd卡烧写相关
+24.tc4_cmm.cmm和uboot_readme.txt文件，三星tc4开发板的文档。
+25.tools工具 编译烧写等等工具
+
+26.CodeSign4SecureBoot_POP和CodeSign4SecureBoot_SCP
+	SCP和POP，uboot中和安全相关的加密文文件

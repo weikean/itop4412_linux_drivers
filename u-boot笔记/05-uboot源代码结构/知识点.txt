@@ -1,0 +1,30 @@
+知识点:
+1.操作系统分层的概念
+	Windows：bios→内核模式→用户模式→用户程序
+	linux：bootloader→内核→文件系统→用户程序
+
+2.bootboader种类介绍
+	U-boot是最通用的bootboader。（210，4412等等）
+	vivi 针对三星的ARM来定制2440上有用到
+3.4412休眠问题
+	它可以直接跳过uboot，直接去运行系统
+	
+4.nandflash中的ECC
+	工艺水平决定，nandflash读写出错。
+	ECC是纠错的算法。分为软件纠错和CPU硬件纠错。
+	4412有1-16bit的纠错能力。
+	tf卡：纠错控制器+存储器
+	eMMC：纠错控制器+MMC（存储器）
+	
+5.为什么从4412开始就不需要jtag了
+	4412的iROM支持TF。tf卡是移动设备。
+	jtag在老的设备中，它是用来第一次烧写uboot的。
+	
+6.BL1是三星提供的二进制文件，没有源码。
+
+7.iTOP4412的uboot源码结构
+
+
+
+
+
